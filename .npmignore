@@ -1,0 +1,7 @@
+config
+coverage
+nyc
+src
+test
+
+*.lcov
