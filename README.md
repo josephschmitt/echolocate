@@ -7,6 +7,8 @@ you figure out the timezone of your user's echo device and relay the time correc
 
 ## Usage
 
+In your Alexa Skill:
+
 ```js
 import echolocate from 'echolocate';
 
@@ -14,14 +16,14 @@ import echolocate from 'echolocate';
 const deviceLocation = await echolocate(deviceId, {consentToken})
 ```
 
-Or alternatively if you want to use the command-line for whatever reason
+Or alternatively if you want to use the command-line for whatever reason:
 
 ```sh
 echolocate --device-id "amzn1.ask.device..." --consent-token "Atza|..."
 ```
 
+Returns:
 ```js
-// Returns:
 {
   deviceId:"amzn1.ask.device....",
   countryCode: "US",

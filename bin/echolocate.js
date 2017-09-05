@@ -10,7 +10,7 @@ const args = minimist(process.argv.slice(2), {
   }
 });
 
-echolocate(args.deviceId, {consentToken: args.consentToken})
+echolocate(args['device-id'], {consentToken: args['consent-token']})
   .then((device) => {
     console.log(JSON.stringify(device));
   })
