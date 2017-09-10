@@ -8,6 +8,8 @@ import getDeviceAddress from './lib/getDeviceAddress.js';
 
 /**
  * @typedef {Object} DeviceLocationQueryOptions
+ * @property {Object} apiEndpoint -- API endpoint to get the location from. This will be provided
+ *     in the Alexa Skill request object. Defaults to https://api.amazonalexa.com
  * @property {String} consentToken -- consentToken from the ASK request session
  * @property {Boolean} [skipDB] -- Whether it should skip looking for the deviceId in the database
  */
@@ -48,7 +50,7 @@ const devices = dynoClient.table(config.get('echolocate.dbTableName'));
  */
 export default async function getDeviceLocation(deviceId, options) {
   return (!options.skipDB && await get(deviceId)) ||
-      await set(buildDeviceLocation(deviceId, options.consentToken));
+      await set(buildDeviceLocation(deviceId, options));
 }
 
 /**
@@ -56,11 +58,11 @@ export default async function getDeviceLocation(deviceId, options) {
  * for where the device is located.
  *
  * @param {String} deviceId
- * @param {String} consentToken
+ * @param {DeviceLocationQueryOptions} options
  * @returns {DeviceLocation}
  */
-async function buildDeviceLocation(deviceId, consentToken) {
-  const address = await getDeviceAddress(deviceId, consentToken);
+async function buildDeviceLocation(deviceId, options) {
+  const address = await getDeviceAddress(deviceId, options);
   const [geo] = await geocoder.geocode(address.postalCode);
   const timezone = await promisify(timezoner.getTimeZone)(geo.latitude, geo.longitude);
 
