@@ -1,6 +1,6 @@
 {
   "name": "echolocate",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Get an Echo device's physical location and timezone using the Alexa API and Geo-location.",
   "main": "dist/bundle.js",
   "repository": "josephschmitt/echolocate",
